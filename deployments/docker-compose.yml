@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  advertising_php:
+    container_name: advertising_php
+    build:
+      context: .
+      dockerfile: ./php/Dockerfile
+      args:
+        - "XDEBUG_MODE=${XDEBUG_MODE}"
+    volumes:
+      - "./../:/var/www/html"
+      - "./php/php.${MODE}.ini:/usr/local/etc/php/custom.d/php.ini"
+
+  advertising_db:
+    image: mysql:8.0.23
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - "./mysql/my.cnf:/etc/mysql/conf.d/my.cnf"
+    ports:
+      - "${DB_PORT}:3306"
+
+  advertising_nginx:
+    image: nginx:1.17
+    ports:
+      - "${APP_PORT}:80"
+    volumes:
+      - "./nginx/log:/var/www/log"
+      - "./nginx/site.conf:/etc/nginx/conf.d/default.conf"
+    depends_on:
+      - advertising_php
+
+  advertising_redis:
+    image: redis:6.2.2-alpine
+    restart: always
+    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru

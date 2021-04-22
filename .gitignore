@@ -1,0 +1,7 @@
+deployments/mysql/data
+deployments/nginx/log
+vendor
+.idea
+var/router.cache
+var/app.log
+.phpunit.result.cache

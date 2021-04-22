@@ -1,0 +1,409 @@
+openapi: 3.0.0
+info:
+  title: 'Swagger classified advertisements'
+  description: 'This is a sample Classified advertisements app.'
+  license:
+    name: 'Apache 2.0'
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://127.0.0.1:8080/v1'
+    description: 'Service host'
+paths:
+  /advertisements:
+    get:
+      summary: 'List of user advertisements'
+      operationId: 'App\Endpoint\Http\AdvertisingHandler::findAllWithCursor'
+      parameters:
+        -
+          name: 'fields[]'
+          in: query
+          schema:
+            $ref: '#/components/schemas/FieldsParam'
+        -
+          name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        -
+          name: value
+          in: query
+          schema:
+            type: integer
+        -
+          name: cursor
+          in: query
+          schema:
+            type: string
+            default: next
+            enum:
+              - next
+              - prev
+      responses:
+        '200':
+          description: 'List of advertising entities'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Advertising' } }
+                  prevCursor: { type: integer, format: int64 }
+                  nextCursor: { type: integer, format: int64 }
+                type: object
+        '401':
+          description: Unauthorized
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        -
+          bearerAuth: []
+    post:
+      summary: 'Create advertising'
+      operationId: 'App\Endpoint\Http\AdvertisingHandler::create'
+      requestBody:
+        description: 'Advertising entity'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Advertising'
+      responses:
+        '201':
+          description: 'Advertising has been created'
+        '401':
+          description: Unauthorized
+        '400':
+          description: 'Validation errors'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        -
+          bearerAuth: []
+  '/advertisements/{id}':
+    get:
+      summary: 'Get advertisements by id'
+      operationId: 'App\Endpoint\Http\AdvertisingHandler::findById'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Advertising ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Advertising entity'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Advertising'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'Advertising not found'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        -
+          bearerAuth: []
+    put:
+      summary: 'Update advertising'
+      operationId: 'App\Endpoint\Http\AdvertisingHandler::update'
+      requestBody:
+        description: 'Advertising entity'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Advertising'
+      responses:
+        '200':
+          description: 'Advertising has been updated'
+        '400':
+          description: 'Validation errors'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'Advertising not found'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        -
+          bearerAuth: []
+    delete:
+      summary: 'Delete advertising by id'
+      operationId: 'App\Endpoint\Http\AdvertisingHandler::delete'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'User ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Advertising has been deleted'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'Advertising not found'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        -
+          bearerAuth: []
+  /sign-in:
+    post:
+      summary: 'App sing-in'
+      operationId: 'App\Endpoint\Http\AuthHandler::signIn'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: 'User email'
+                  type: string
+                password:
+                  description: 'User password'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Bearer token'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: 'Invalid username or password'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /health:
+    get:
+      summary: 'Health check'
+      operationId: 'App\Endpoint\Http\HealthHandler::check'
+      responses:
+        '200':
+          description: 'Service alived'
+          content:
+            application/json:
+              schema:
+                properties:
+                  health: { type: string, enum: [alive] }
+                type: object
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  '/users/{id}':
+    get:
+      summary: 'Get user by id'
+      operationId: 'App\Endpoint\Http\UserHandler::findById'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'User ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'User entity'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'Empty body'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        -
+          bearerAuth: []
+    delete:
+      summary: 'Delete user by id'
+      operationId: 'App\Endpoint\Http\UserHandler::delete'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'User ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'User has been deleted'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'User not found'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        -
+          bearerAuth: []
+  /sign-up:
+    post:
+      summary: 'Create user'
+      operationId: 'App\Endpoint\Http\UserHandler::create'
+      requestBody:
+        description: 'User entity'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: 'User has been created'
+        '400':
+          description: 'Validation errors'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  '/user/{id}':
+    put:
+      summary: 'Update user'
+      operationId: 'App\Endpoint\Http\UserHandler::update'
+      requestBody:
+        description: 'User entity'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: 'User has been updated'
+        '400':
+          description: 'Validation errors'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'User not found'
+        '500':
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        -
+          bearerAuth: []
+components:
+  schemas:
+    FieldsParam:
+      type: array
+      items:
+        type: string
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+      type: object
+    CreatedResponse:
+      properties:
+        inserted_id:
+          type: int
+          format: int64
+      type: object
+    Advertising:
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+      type: object
+    Token:
+      properties:
+        token:
+          type: string
+          format: string
+      type: object
+    User:
+      required:
+        - email
+        - firstName
+        - lastName
+        - password
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: string
+          writeOnly: true
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      name: Authorization
+      in: header
+      bearerFormat: JWT
+      scheme: bearer
+
