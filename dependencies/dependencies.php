@@ -134,63 +134,63 @@ $dependencies = [
 
     // Handlers
 
-    'App\Endpoint\Http\HealthHandler::check' => [
-        DI\autowire(App\Endpoint\Http\HealthHandler::class),
+    'App\Endpoint\Http\Handler\HealthHandler::check' => [
+        DI\autowire(App\Endpoint\Http\Handler\HealthHandler::class),
         'check'
     ],
 
-    'App\Endpoint\Http\MetricsHandler::metrics' => [
-        DI\autowire(App\Endpoint\Http\MetricsHandler::class),
+    'App\Endpoint\Http\Handler\MetricsHandler::metrics' => [
+        DI\autowire(App\Endpoint\Http\Handler\MetricsHandler::class),
         'metrics'
     ],
 
-    'App\Endpoint\Http\AuthHandler::signIn' => [
-        DI\autowire(App\Endpoint\Http\AuthHandler::class),
+    'App\Endpoint\Http\Handler\AuthHandler::signIn' => [
+        DI\autowire(App\Endpoint\Http\Handler\AuthHandler::class),
         'signIn'
     ],
 
-    'App\Endpoint\Http\UserHandler::create' => [
-        DI\autowire(App\Endpoint\Http\UserHandler::class),
+    'App\Endpoint\Http\Handler\UserHandler::create' => [
+        DI\autowire(App\Endpoint\Http\Handler\UserHandler::class),
         'create'
     ],
 
-    'App\Endpoint\Http\UserHandler::update' => [
-        DI\autowire(App\Endpoint\Http\UserHandler::class),
+    'App\Endpoint\Http\Handler\UserHandler::update' => [
+        DI\autowire(App\Endpoint\Http\Handler\UserHandler::class),
         'update'
     ],
 
-    'App\Endpoint\Http\UserHandler::delete' => [
-        DI\autowire(App\Endpoint\Http\UserHandler::class),
+    'App\Endpoint\Http\Handler\UserHandler::delete' => [
+        DI\autowire(App\Endpoint\Http\Handler\UserHandler::class),
         'delete'
     ],
 
-    'App\Endpoint\Http\UserHandler::findByEmail' => [
-        DI\autowire(App\Endpoint\Http\UserHandler::class),
+    'App\Endpoint\Http\Handler\UserHandler::findByEmail' => [
+        DI\autowire(App\Endpoint\Http\Handler\UserHandler::class),
         'findByEmail'
     ],
 
-    'App\Endpoint\Http\AdvertisingHandler::findAllWithCursor' => [
-        DI\autowire(App\Endpoint\Http\AdvertisingHandler::class),
+    'App\Endpoint\Http\Handler\AdvertisingHandler::findAllWithCursor' => [
+        DI\autowire(App\Endpoint\Http\Handler\AdvertisingHandler::class),
         'findAllWithCursor'
     ],
 
-    'App\Endpoint\Http\AdvertisingHandler::create' => [
-        DI\autowire(App\Endpoint\Http\AdvertisingHandler::class),
+    'App\Endpoint\Http\Handler\AdvertisingHandler::create' => [
+        DI\autowire(App\Endpoint\Http\Handler\AdvertisingHandler::class),
         'create'
     ],
 
-    'App\Endpoint\Http\AdvertisingHandler::update' => [
-        DI\autowire(App\Endpoint\Http\AdvertisingHandler::class),
+    'App\Endpoint\Http\Handler\AdvertisingHandler::update' => [
+        DI\autowire(App\Endpoint\Http\Handler\AdvertisingHandler::class),
         'update'
     ],
 
-    'App\Endpoint\Http\AdvertisingHandler::delete' => [
-        DI\autowire(App\Endpoint\Http\AdvertisingHandler::class),
+    'App\Endpoint\Http\Handler\AdvertisingHandler::delete' => [
+        DI\autowire(App\Endpoint\Http\Handler\AdvertisingHandler::class),
         'delete'
     ],
 
-    'App\Endpoint\Http\AdvertisingHandler::findById' => [
-        DI\autowire(App\Endpoint\Http\AdvertisingHandler::class),
+    'App\Endpoint\Http\Handler\AdvertisingHandler::findById' => [
+        DI\autowire(App\Endpoint\Http\Handler\AdvertisingHandler::class),
         'findById'
     ],
 

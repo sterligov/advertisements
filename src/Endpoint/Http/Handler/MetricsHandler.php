@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Endpoint\Http;
+namespace App\Endpoint\Http\Handler;
 
 
 use Laminas\Diactoros\Response\TextResponse;

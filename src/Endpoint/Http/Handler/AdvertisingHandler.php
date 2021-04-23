@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Endpoint\Http;
+namespace App\Endpoint\Http\Handler;
 
 
 use OpenApi\Annotations as OA;
@@ -15,7 +15,6 @@ use Laminas\Diactoros\Response;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Log\LoggerInterface;
 
 class AdvertisingHandler
 {
