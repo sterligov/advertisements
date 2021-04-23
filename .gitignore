@@ -1,5 +1,6 @@
 deployments/mysql/data
 deployments/nginx/log
+deployments/grafana
 vendor
 .idea
 var/router.cache
