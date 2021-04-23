@@ -27,10 +27,7 @@ class MetricsMiddleware implements MiddlewareInterface
 
         $requestMilSec = (microtime(true) - $start) * 1000;
 
-        $labels = [
-            'status' => $response->getStatusCode(),
-            'path' => $request->getUri()->getPath()
-        ];
+        $labels = [(string)$response->getStatusCode(), $request->getUri()->getPath()];
 
         try {
             $this
