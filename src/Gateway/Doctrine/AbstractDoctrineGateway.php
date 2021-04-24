@@ -55,9 +55,6 @@ abstract class AbstractDoctrineGateway extends EntityRepository
         }
     }
 
-    /**
-     * @return Advertising|null
-     */
     public function findById(int $id): ?object
     {
         return $this->find($id);
