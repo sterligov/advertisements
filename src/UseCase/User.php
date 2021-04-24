@@ -27,16 +27,12 @@ class User implements UserInterface
         return $this->userGateway->findByEmail($email);
     }
 
-    /**
-     * @return \App\Domain\Entity\User|null
-     */
     public function findById(int $id): ?object
     {
         return $this->userGateway->findById($id);
     }
 
     /**
-     * @throws EntityNotFoundException
      * @throws \App\Domain\Exception\GatewayException
      */
     public function delete(UserEntity $user): void
@@ -47,7 +43,6 @@ class User implements UserInterface
     /**
      * @throws ValidationException
      * @throws \App\Domain\Exception\GatewayException
-     * @throws \App\Domain\Exception\PasswordHashException
      */
     public function create(UserEntity $user): void
     {
@@ -62,7 +57,6 @@ class User implements UserInterface
     /**
      * @throws ValidationException
      * @throws \App\Domain\Exception\GatewayException
-     * @throws \App\Domain\Exception\PasswordHashException
      */
     public function update(UserEntity $user): void
     {
