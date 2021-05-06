@@ -8,6 +8,7 @@ use OpenApi\Annotations as OA;
 use App\Domain\Entity\Advertising;
 use App\Domain\Entity\Cursor;
 use App\Domain\Entity\DTO\InsertedId;
+use App\Endpoint\Http\ResponseStatus;
 use App\Domain\Exception\UnexpectedActiveUserException;
 use App\Domain\UseCase\ActiveUserInterface;
 use App\Domain\UseCase\AdvertisingInterface;

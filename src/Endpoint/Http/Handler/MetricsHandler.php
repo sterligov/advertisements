@@ -9,6 +9,7 @@ use Prometheus\RegistryInterface;
 use Prometheus\RendererInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use App\Endpoint\Http\ResponseStatus;
 
 class MetricsHandler
 {

@@ -10,6 +10,7 @@ use App\Domain\UseCase\AuthInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use App\Endpoint\Http\ResponseStatus;
 
 class AuthHandler
 {

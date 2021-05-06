@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Endpoint\Http\Handler;
+namespace App\Endpoint\Http;
 
 
 class ResponseStatus

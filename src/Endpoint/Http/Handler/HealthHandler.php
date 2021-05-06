@@ -7,6 +7,7 @@ namespace App\Endpoint\Http\Handler;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use App\Endpoint\Http\ResponseStatus;
 
 class HealthHandler
 {
