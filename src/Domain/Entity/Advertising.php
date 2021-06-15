@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Advertising extends DoctrineEntity implements UniqueEntityInterface
 {
     /**
+     *
      * @var string[]
      */
     protected array $allowedFieldsToMassWrite = ['name', 'description', 'price'];
